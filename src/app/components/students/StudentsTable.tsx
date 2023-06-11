@@ -4,9 +4,18 @@ import { Student } from "@/utils/types";
 interface Props {
   data: Student[] | [] | undefined;
   headers: string[];
+  onEditClick: Function;
+  openEditModal: () => void; // Function to open the modal
 }
 
-export function StudentsTable({ data, headers }: Props) {
+export function StudentsTable({
+  data,
+  headers,
+  onEditClick,
+  openEditModal,
+}: Props) {
+  const handleEdit = (student: Student) => {};
+
   return (
     <div className="overflow-x-auto mt-4">
       <table className="table table-zebra table-lg">
@@ -17,6 +26,7 @@ export function StudentsTable({ data, headers }: Props) {
             {headers.map((header: string, _id: number) => (
               <th key={_id + 1}>{header}</th>
             ))}
+            <th colSpan={2}></th>
           </tr>
         </thead>
         <tbody>
@@ -31,6 +41,20 @@ export function StudentsTable({ data, headers }: Props) {
                 <td>{student.sex}</td>
                 <td>{student.dob}</td>
                 <td>{student.age}</td>
+                <td>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => {
+                      onEditClick(student);
+                      openEditModal();
+                    }}
+                  >
+                    Edit
+                  </button>
+                </td>
+                <td>
+                  <button className="btn btn-error">Delete</button>
+                </td>
               </tr>
             ))}
         </tbody>

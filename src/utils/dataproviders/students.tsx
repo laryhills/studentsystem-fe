@@ -1,4 +1,4 @@
-import { Student } from "../types";
+import { Student, UpdateStudent } from "../types";
 import axios from "redaxios";
 
 const BASE_URL = "http://localhost:8080/api/v2";
@@ -22,6 +22,11 @@ export const fetchStudentByIdFromAPI = async (id: string) => {
 
 export const createStudentFromAPI = async (student: Student) => {
   const res = await axiosInstance.post("/students", student);
+  return res.data;
+};
+
+export const updateStudentFromAPI = async (student: UpdateStudent) => {
+  const res = await axiosInstance.put(`/students/${student.id}`, student);
   return res.data;
 };
 

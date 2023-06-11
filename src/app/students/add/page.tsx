@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { createStudentFromAPI } from "@/utils/dataproviders/students";
-
 import { toast } from "react-toastify";
 import { ErrorResponse, Student, SuccessResponse } from "@/utils/types";
 
@@ -23,23 +22,25 @@ export default function Page() {
     {
       onSuccess: (data) => {
         setTimeout(() => {
-          toast.update(toastId.current, {
-            render: data.message,
-            type: "success",
-            isLoading: false,
-            autoClose: 4000,
-          });
+          toastId.current &&
+            toast.update(toastId.current, {
+              render: data.message,
+              type: "success",
+              isLoading: false,
+              autoClose: 4000,
+            });
           reset();
         }, 1000);
       },
       onError: ({ data }) => {
         setTimeout(() => {
-          toast.update(toastId.current, {
-            render: data?.message,
-            type: "error",
-            isLoading: false,
-            autoClose: 4000,
-          });
+          toastId.current &&
+            toast.update(toastId.current, {
+              render: data?.message,
+              type: "error",
+              isLoading: false,
+              autoClose: 4000,
+            });
         }, 1000);
       },
     }

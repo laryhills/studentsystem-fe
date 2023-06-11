@@ -9,6 +9,12 @@ export type Student = {
   sex: string;
 };
 
+export type UpdateStudent = {
+  id: number;
+  phone: string;
+  address: string;
+};
+
 export type SuccessResponse = {
   data: Student[] | [];
   message: string;
