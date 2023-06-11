@@ -15,7 +15,7 @@ interface Props {
   student: Student | null;
   updateStudents: React.Dispatch<React.SetStateAction<Student[]>>;
   closeEditModal: () => void;
-  setStudent: React.Dispatch<React.SetStateAction<Student | null>>;
+  updateStudent: React.Dispatch<React.SetStateAction<Student | null>>;
   modalOpen: boolean;
 }
 
@@ -28,7 +28,7 @@ export default function EditStudentModal({
   student,
   updateStudents,
   closeEditModal,
-  setStudent,
+  updateStudent,
   modalOpen,
 }: Props) {
   const modalClass = classnames("modal modal-bottom sm:modal-middle", {
@@ -107,7 +107,7 @@ export default function EditStudentModal({
   if (!student) return;
 
   const handleModalClose = () => {
-    setStudent(null); // Reset the student state to null
+    updateStudent(null); // Reset the student state to null
     closeEditModal();
   };
 

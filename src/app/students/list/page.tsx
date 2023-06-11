@@ -7,11 +7,13 @@ import { fetchAllStudentFromAPI } from "@/utils/dataproviders/students";
 import { Student, SuccessResponse } from "@/utils/types";
 import EditStudentModal from "@/app/components/students/EditStudentModal";
 import { toast } from "react-toastify";
+import DeleteStudentModal from "@/app/components/students/DeleteStudentModal";
 
 export default function Page() {
   const [students, setStudents] = useState<Student[]>([]);
-  const [student, setStudent] = useState(null);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { data, isLoading, isError, error, status } = useQuery<
     SuccessResponse,
     Error
@@ -51,32 +53,24 @@ export default function Page() {
       <StudentsTable
         data={students}
         headers={headers}
-        onEditClick={setStudent}
+        onStudentClick={setSelectedStudent}
         openEditModal={() => setOpenEditModal(true)}
+        openDeleteModal={() => setOpenDeleteModal(true)}
       />
       <EditStudentModal
-        student={student}
+        student={selectedStudent}
         updateStudents={setStudents}
         closeEditModal={() => setOpenEditModal(false)}
-        setStudent={setStudent}
+        updateStudent={setSelectedStudent}
         modalOpen={openEditModal}
       />
-
-      {/* Open the modal using ID.showModal() method */}
-      {/* <button className="btn" onClick={() => window.my_modal_1.showModal()}>
-        open modal
-      </button>
-      <dialog id="my_modal_1" className="modal">
-        <form method="dialog" className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">
-            Press ESC key or click the button below to close
-          </p>
-          <div className="modal-action">
-            <button className="btn">Close</button>
-          </div>
-        </form>
-      </dialog> */}
+      <DeleteStudentModal
+        student={selectedStudent}
+        updateStudents={setStudents}
+        closeDeleteModal={() => setOpenDeleteModal(false)}
+        updateStudent={setSelectedStudent}
+        modalOpen={openDeleteModal}
+      />
     </>
   );
 }

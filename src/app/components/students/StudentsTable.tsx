@@ -4,15 +4,17 @@ import { Student } from "@/utils/types";
 interface Props {
   data: Student[] | [] | undefined;
   headers: string[];
-  onEditClick: Function;
+  onStudentClick: Function;
   openEditModal: () => void; // Function to open the modal
+  openDeleteModal: () => void; // Function to open the modal
 }
 
 export function StudentsTable({
   data,
   headers,
-  onEditClick,
+  onStudentClick,
   openEditModal,
+  openDeleteModal,
 }: Props) {
   const handleEdit = (student: Student) => {};
 
@@ -45,7 +47,7 @@ export function StudentsTable({
                   <button
                     className="btn btn-secondary"
                     onClick={() => {
-                      onEditClick(student);
+                      onStudentClick(student);
                       openEditModal();
                     }}
                   >
@@ -53,7 +55,15 @@ export function StudentsTable({
                   </button>
                 </td>
                 <td>
-                  <button className="btn btn-error">Delete</button>
+                  <button
+                    className="btn btn-error"
+                    onClick={() => {
+                      onStudentClick(student);
+                      openDeleteModal();
+                    }}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

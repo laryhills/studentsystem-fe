@@ -30,6 +30,11 @@ export const updateStudentFromAPI = async (student: UpdateStudent) => {
   return res.data;
 };
 
+export const deleteStudentFromAPI = async (id: number) => {
+  const res = await axiosInstance.delete(`/students/${id}`);
+  return res.data;
+};
+
 /* 
 import { AnyAction, EnhancedStore } from "@reduxjs/toolkit";
 import axios from "axios";
