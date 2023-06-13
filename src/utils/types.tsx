@@ -41,6 +41,7 @@ export type ErrorResponse = {
     errors: any;
     status: string;
   };
+  message?: string;
 };
 
 export type UserDetails = {

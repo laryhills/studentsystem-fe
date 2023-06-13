@@ -4,7 +4,6 @@ import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { ErrorResponse, LoginUser, SuccessResponse } from "@/utils/types";
 import { loginUserAPI } from "../services/dataproviders/auth.providers";
-import { useRouter } from "next/navigation";
 
 type Inputs = {
   username: string;
@@ -12,7 +11,6 @@ type Inputs = {
 };
 
 export const Login = () => {
-  const router = useRouter();
   const mutation = useMutation<SuccessResponse, ErrorResponse, LoginUser>(
     loginUserAPI,
     {
@@ -27,7 +25,10 @@ export const Login = () => {
             isLoading: false,
             autoClose: 4000,
           });
-        window.location.href = "/";
+        // delay reload to allow toast to show
+        setTimeout(() => {
+          window.location.reload();
+        }, 1700);
       },
       onError: ({ data }) => {
         toastId.current &&

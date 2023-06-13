@@ -4,7 +4,7 @@ import { use, useEffect, useState } from "react";
 import { StudentsTable } from "@/app/components/students/StudentsTable";
 import { useQuery } from "react-query";
 import { fetchAllStudentFromAPI } from "@/app/services/dataproviders/students.provider";
-import { Student, SuccessResponse } from "@/utils/types";
+import { ErrorResponse, Student, SuccessResponse } from "@/utils/types";
 import EditStudentModal from "@/app/components/students/EditStudentModal";
 import { toast } from "react-toastify";
 import DeleteStudentModal from "@/app/components/students/DeleteStudentModal";
@@ -16,13 +16,15 @@ export default function Page() {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { data, isLoading, isError, error, status } = useQuery<
     SuccessResponse,
-    Error
+    ErrorResponse
   >("students", fetchAllStudentFromAPI, {
     onSuccess: (data) => {
       setStudents(data.data);
       toast.success(data.message);
     },
     enabled: students.length === 0, // Fetch only if students array is empty
+    retry: 1,
+    retryDelay: 5000,
   });
 
   const headers = [
@@ -44,7 +46,11 @@ export default function Page() {
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return (
+      <span>
+        Error: {error.data?.message ? error.data?.message : error.message}
+      </span>
+    );
   }
 
   return (

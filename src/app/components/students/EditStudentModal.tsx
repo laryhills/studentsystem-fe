@@ -42,7 +42,7 @@ export default function EditStudentModal({
         // add stundets to prev list
         updateStudents((prev) => {
           const index = prev.findIndex((s) => s.id === student?.id);
-          prev[index] = { ...prev[index], ...data.data };
+          prev[index] = { ...prev[index], ...data.data[0] };
           return prev;
         });
         toastId.current &&
@@ -117,6 +117,12 @@ export default function EditStudentModal({
         method="dialog"
         className="modal-box"
         onSubmit={handleSubmit(onSubmit)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            handleSubmit(onSubmit)();
+          }
+        }}
       >
         <button
           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
