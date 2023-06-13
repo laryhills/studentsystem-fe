@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { deleteStudentFromAPI } from "@/utils/dataproviders/students";
+import { deleteStudentFromAPI } from "@/app/services/dataproviders/students.provider";
 import { toast } from "react-toastify";
 import { ErrorResponse, Student, SuccessResponse } from "@/utils/types";
 import classnames from "classnames";

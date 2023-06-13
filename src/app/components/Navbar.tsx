@@ -1,6 +1,18 @@
 import React from "react";
+import { useStore } from "@/app/stores/userStore";
 
-export function Navbar() {
+type Props = {
+  user: any;
+};
+
+export function Navbar({ user }: Props) {
+  const logout = useStore((state) => state.logout);
+
+  const handleLogout = () => {
+    logout();
+    window.location.href = "/";
+  };
+
   return (
     <div className="w-full navbar bg-base-300 text-neutral">
       <div className="flex-none lg:hidden">
@@ -29,6 +41,24 @@ export function Navbar() {
           </li>
           <li>
             <a>Navbar Item 2</a>
+          </li>
+        </ul>
+      </div>
+      <div className="dropdown dropdown-bottom dropdown-end z-10">
+        <label tabIndex={0} className="btn m-1">
+          {user.name}
+        </label>
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+        >
+          <li>
+            <a>Item 2</a>
+          </li>
+          <li>
+            <a href="#" onClick={() => logout()}>
+              Logout
+            </a>
           </li>
         </ul>
       </div>

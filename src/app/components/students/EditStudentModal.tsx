@@ -1,7 +1,7 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { updateStudentFromAPI } from "@/utils/dataproviders/students";
+import { updateStudentFromAPI } from "@/app/services/dataproviders/students.provider";
 import { toast } from "react-toastify";
 import {
   ErrorResponse,

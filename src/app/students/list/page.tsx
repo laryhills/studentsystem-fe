@@ -3,7 +3,7 @@
 import { use, useEffect, useState } from "react";
 import { StudentsTable } from "@/app/components/students/StudentsTable";
 import { useQuery } from "react-query";
-import { fetchAllStudentFromAPI } from "@/utils/dataproviders/students";
+import { fetchAllStudentFromAPI } from "@/app/services/dataproviders/students.provider";
 import { Student, SuccessResponse } from "@/utils/types";
 import EditStudentModal from "@/app/components/students/EditStudentModal";
 import { toast } from "react-toastify";

@@ -1,14 +1,5 @@
-import { Student, UpdateStudent } from "../types";
-import axios from "redaxios";
-
-const BASE_URL = "http://localhost:8080/api/v2";
-
-const axiosInstance = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+import { Student, UpdateStudent } from "@/utils/types";
+import { axiosInstance } from "../base.service";
 
 export const fetchAllStudentFromAPI = async () => {
   const res = await axiosInstance.get("/students");

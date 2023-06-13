@@ -15,10 +15,23 @@ export type UpdateStudent = {
   address: string;
 };
 
+export type CreateUser = {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+};
+
+export type LoginUser = {
+  username: string;
+  password: string;
+};
+
 export type SuccessResponse = {
-  data: Student[] | [];
+  data: any[] | [];
   message: string;
   status: string;
+  token: string;
 };
 
 // error message with unknown fields
@@ -28,4 +41,11 @@ export type ErrorResponse = {
     errors: any;
     status: string;
   };
+};
+
+export type UserDetails = {
+  id: number;
+  username: string;
+  email: string;
+  roles: string[];
 };
